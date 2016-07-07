@@ -1,0 +1,23 @@
+{
+  "name": "react-es6",
+  "version": "1.0.0",
+  "description": "This is the react ES6 sandbox module",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server webpack.config.js"
+  },
+  "author": "Baptiste Rios Campo",
+  "license": "ISC",
+  "dependencies": {
+    "babel-preset-react": "^6.5.0",
+    "babel-preset-stage-2": "^6.11.0",
+    "qwest": "^4.4.4",
+    "react": "^0.14.7",
+    "react-dom": "^0.14.7",
+    "redux": "^3.5.2"
+  },
+  "devDependencies": {
+    "react": "^0.14.8",
+    "react-dom": "^0.14.8"
+  }
+}
