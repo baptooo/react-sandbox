@@ -3,7 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import MemeGen from './memegenView';
 
-let memeState, memeStore, memepropStore;
+let memeState, memeStore;
 
 const memeprop = (state = { name: '', top: '', bottom: ''}, action) => {
   switch(action.type) {
@@ -22,17 +22,14 @@ const memegen = (state = memeState, action) => {
 
   switch(action.type) {
     case 'UPDATE_MEME':
-      memepropStore.dispatch({ ...action, type: 'UPDATE_PROP' });
-      return { ...state, meme: memepropStore.getState() };
+      return { ...state, meme: memeprop(state.meme, {...action, type: 'UPDATE_PROP' }) };
     case 'CREATE_MEME':
       if(!name || !top || !bottom) {
         throw('You cannot create a meme with empty vars');
       } else {
-        memepropStore.dispatch({ type: 'RESET_PROPS' });
-
         return { ...state,
           memes: [...memes, `http://memegen.link/${name}/${top}/${bottom}.jpg`],
-          meme: memepropStore.getState()
+          meme: memeprop(state.meme, { type: 'RESET_PROPS' })
         };
       }
     default:
@@ -59,7 +56,6 @@ const render = () => {
 const init = (state = { meme: {}, memes: []}) => {
   memeState = state;
   memeStore = createStore(memegen);
-  memepropStore = createStore(memeprop);
 
   memeStore.subscribe(render);
   render();
