@@ -1,42 +1,41 @@
-import { createStore } from 'redux';
+import { createStore, combineReducers } from 'redux';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import MemeGen from './memegenView';
 
-let memeState, memeStore;
+let memeStore;
 
-const memeprop = (state = { name: '', top: '', bottom: ''}, action) => {
+const memeReducer = (state = { name: '', top: '', bottom: ''}, action) => {
   switch(action.type) {
-    case 'UPDATE_PROP':
+    case 'UPDATE_MEME':
       return { ...state, [action.propName] : action.propValue };
-    case 'RESET_PROPS':
+    case 'CREATE_MEME':
       return { name: '', top: '', bottom: '' };
     default:
       return state;
   }
 };
 
-const memegen = (state = memeState, action) => {
-  let { meme, memes } = state;
-  let { name, top, bottom } = meme;
+const memesReducer = (state = [], action) => {
+  let { name, top, bottom } = action;
 
   switch(action.type) {
-    case 'UPDATE_MEME':
-      return { ...state, meme: memeprop(state.meme, {...action, type: 'UPDATE_PROP' }) };
     case 'CREATE_MEME':
       if(!name || !top || !bottom) {
-        throw('You cannot create a meme with empty vars');
-      } else {
-        return { ...state,
-          memes: [...memes, `http://memegen.link/${name}/${top}/${bottom}.jpg`],
-          meme: memeprop(state.meme, { type: 'RESET_PROPS' })
-        };
+        throw('You cannot create a meme with no name, top or bottom');
       }
+      return [
+        ...state, `http://memegen.link/${name}/${top}/${bottom}.jpg`
+      ];
     default:
       return state;
   }
 };
 
+const memegen = combineReducers({
+  meme: memeReducer,
+  memes: memesReducer
+});
 
 
 const render = () => {
@@ -48,14 +47,13 @@ const render = () => {
              onUpdateName={(evt) => memeStore.dispatch({ type: 'UPDATE_MEME', propName: 'name', propValue: evt.target.value })}
              onUpdateTop={(evt) => memeStore.dispatch({ type: 'UPDATE_MEME', propName: 'top', propValue: evt.target.value })}
              onUpdateBottom={(evt) => memeStore.dispatch({ type: 'UPDATE_MEME', propName: 'bottom', propValue: evt.target.value })}
-             onCreateMeme={(evt) => memeStore.dispatch({ type: 'CREATE_MEME' })}
+             onCreateMeme={(evt) => memeStore.dispatch({ type: 'CREATE_MEME', ...meme })}
     />, document.getElementById('react-app')
   )
 };
 
 const init = (state = { meme: {}, memes: []}) => {
-  memeState = state;
-  memeStore = createStore(memegen);
+  memeStore = createStore(memegen, state);
 
   memeStore.subscribe(render);
   render();
