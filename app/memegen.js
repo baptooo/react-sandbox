@@ -2,6 +2,7 @@ import { createStore, combineReducers } from 'redux';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import MemeGen from './components/memegenView';
+import * as quackAlert from 'quack-alert';
 
 let memeStore;
 
@@ -22,7 +23,8 @@ const memesReducer = (state = [], action) => {
   switch(action.type) {
     case 'CREATE_MEME':
       if(!name || !top || !bottom) {
-        throw('You cannot create a meme with no name, top or bottom');
+        alert('Coin !');
+        throw('You cannot create a meme with no name, top or bottom')
       }
       return [
         ...state, `http://memegen.link/${name}/${top}/${bottom}.jpg`
