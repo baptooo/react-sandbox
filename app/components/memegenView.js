@@ -1,24 +1,25 @@
 import React from 'react';
+import styles from './memegen.css';
 
 const MemeForm = ({
   name, top, bottom,
   onUpdateName, onUpdateTop, onUpdateBottom, onCreateMeme
 }) => {
   return (
-    <form noValidate>
-      <p>
+    <form noValidate className={styles.form} onSubmit={onCreateMeme}>
+      <p className={styles.field}>
         <label htmlFor="memeName">Meme name :</label>
-        <input value={name} name="memeName" type="text" onChange={onUpdateName}/>
+        <input id="memeName" value={name} name="memeName" type="text" onChange={onUpdateName}/>
       </p>
-      <p>
+      <p className={styles.field}>
         <label htmlFor="memeTop">Meme top text :</label>
-        <input value={top} name="memeTop" type="text" onChange={onUpdateTop}/>
+        <input id="memeTop" value={top} name="memeTop" type="text" onChange={onUpdateTop}/>
       </p>
-      <p>
+      <p className={styles.field}>
         <label htmlFor="memeBottom">Meme bottom text :</label>
-        <input value={bottom} name="memeBottom" type="text" onChange={onUpdateBottom}/>
+        <input id="memeBottom" value={bottom} name="memeBottom" type="text" onChange={onUpdateBottom}/>
       </p>
-      <button type="button" onClick={onCreateMeme}>Create meme</button>
+      <button className={styles.button} onClick={onCreateMeme}>Create meme</button>
     </form>
   );
 };

@@ -1,7 +1,7 @@
 import { createStore, combineReducers } from 'redux';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import MemeGen from './memegenView';
+import MemeGen from './components/memegenView';
 
 let memeStore;
 
@@ -47,7 +47,10 @@ const render = () => {
              onUpdateName={(evt) => memeStore.dispatch({ type: 'UPDATE_MEME', propName: 'name', propValue: evt.target.value })}
              onUpdateTop={(evt) => memeStore.dispatch({ type: 'UPDATE_MEME', propName: 'top', propValue: evt.target.value })}
              onUpdateBottom={(evt) => memeStore.dispatch({ type: 'UPDATE_MEME', propName: 'bottom', propValue: evt.target.value })}
-             onCreateMeme={(evt) => memeStore.dispatch({ type: 'CREATE_MEME', ...meme })}
+             onCreateMeme={(evt) => {
+               evt.preventDefault();
+               memeStore.dispatch({ type: 'CREATE_MEME', ...meme });
+             }}
     />, document.getElementById('react-app')
   )
 };

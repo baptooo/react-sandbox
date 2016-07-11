@@ -1,0 +1,40 @@
+.form {
+  padding: 1.5rem;
+}
+
+.form:after {
+  display: table;
+  content: '';
+  clear: both;
+}
+
+.field {
+  width: 100%;
+}
+
+.field label {
+  display: inline-block;
+  width: 30%;
+  box-sizing: border-box;
+}
+
+.field input {
+  box-sizing: border-box;
+  padding: .5rem;
+  border: 1px solid #ccc;
+  width: 70%;
+}
+
+.button {
+  padding: 1rem 3rem;
+  border: 0;
+  background-color: #3a3ee2;
+  cursor: pointer;
+  float: right;
+  font-size: 1rem;
+  color: white;
+}
+
+.button:hover {
+  background-color: #4347ff;
+}
