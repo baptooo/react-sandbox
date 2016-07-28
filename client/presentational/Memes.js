@@ -1,13 +1,15 @@
 import React, { PropTypes } from 'react';
+import styles from './Memes.css';
+import Picture from './Picture';
 
 const Memes = ({
   memes,
 }) => (
-  <fieldset style={{ border: '1px solid #ccc', padding: '1rem', marginTop: '2rem' }}>
+  <section className={styles.container}>
     {memes.map((url, key) => {
-      return <img src={url} alt={'meme:' + url} key={key} style={{ maxWidth: '50%' }} />
+      return <Picture key={key} url={url} />
     })}
-  </fieldset>
+  </section>
 );
 
 Memes.propTypes = {

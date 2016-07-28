@@ -1,0 +1,23 @@
+.container {
+  padding: 1rem;
+  margin-top: 2rem;
+  display: table;
+}
+
+.picture {
+  width: calc(100% / 3);
+  display: inline-block;
+  vertical-align: top;
+  margin: 1rem 0;
+}
+
+.picture__img {
+  max-width: 100%;
+}
+
+.picture__wrapper {
+  margin: 0 1rem;
+  padding: 1rem;
+  box-shadow: 0 1rem 1rem rgba(0,0,0,.2);
+  height: 20rem;
+}
