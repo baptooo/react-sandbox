@@ -4,7 +4,8 @@
   "description": "This is the react ES6 sandbox module",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server webpack.config.js"
+    "start": "webpack-dev-server webpack.config.js",
+    "test": "mocha-webpack --webpack-config webpack.config.test.js \"client/**/*.spec.js\" --require test/setup"
   },
   "author": "Baptiste Rios Campo",
   "license": "ISC",
@@ -20,11 +21,20 @@
   "devDependencies": {
     "babel-core": "^6.10.4",
     "babel-loader": "^6.2.4",
+    "chai": "^3.5.0",
     "css-loader": "^0.23.1",
+    "enzyme": "^2.4.1",
+    "jsdom": "^9.4.1",
+    "mocha": "^2.5.3",
+    "mocha-webpack": "^0.5.0",
     "quack-alert": "^1.0.1",
     "react": "^0.14.8",
+    "react-addons-test-utils": "^15.2.1",
     "react-dom": "^0.14.8",
     "react-redux": "^4.4.5",
-    "style-loader": "^0.13.1"
+    "sinon": "^1.17.5",
+    "style-loader": "^0.13.1",
+    "webpack": "^1.13.1",
+    "webpack-node-externals": "^1.3.2"
   }
 }
